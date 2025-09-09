@@ -32,7 +32,7 @@ public class Player{
         return firstName;
     }
     public String getLastName(){
-        return lastName;
+        return lastName; //används ej. Har med för det stod i projektet, men hade hellre kört bara name.
     }
     public String getFullName(){
         return firstName+" "+lastName;
