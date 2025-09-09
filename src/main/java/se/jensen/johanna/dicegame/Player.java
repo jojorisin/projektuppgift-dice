@@ -24,7 +24,7 @@ public class Player{
     }
 
     private boolean isValidName(String name){
-        return name!=null && !name.trim().isEmpty();
+        return name!=null && !name.trim().isEmpty(); //viktigt me null först
 
     }
 
