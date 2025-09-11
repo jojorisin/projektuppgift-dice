@@ -6,6 +6,7 @@ public class Player{
     private int score;
     private int totalScore;
 
+
     public void setFirstName(String firstName) throws IllegalArgumentException{
         if(!isValidName(firstName)){
             throw new IllegalArgumentException("Invalid input. Please fill in all required names");

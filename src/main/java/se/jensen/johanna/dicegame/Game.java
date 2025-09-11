@@ -9,8 +9,8 @@ public class Game {
    private final Dice dice=new Dice();
    private boolean playersSet=false;
    private boolean play=false;
-   private int rounds=2;
-   private ImageIcon icon;
+   private int rounds;
+   private final ImageIcon icon;
 
    public Game(){
        icon=loadImageIcon();
@@ -24,6 +24,7 @@ public class Game {
            String p2Name=(String)JOptionPane.showInputDialog(null,"Player 2, please enter your name: ","Enter name",JOptionPane.QUESTION_MESSAGE, icon,null," ");
            String p2LastName=(String)JOptionPane.showInputDialog(null,"Player 2, please enter your last name: ","Enter name",JOptionPane.QUESTION_MESSAGE, icon,null," ");
            try{
+               //this is messy, finns nog bättre sätt att göra det på
                p1.setFirstName(p1Name);
                p1.setLastName(p1LastName);
                p2.setFirstName(p2Name);
@@ -42,12 +43,13 @@ public class Game {
            JOptionPane.showMessageDialog(null,"You have to set Players before you can start Game.","Invalid Players ",JOptionPane.INFORMATION_MESSAGE, icon);
            setPlayers();
        }
+       rounds=2;
        while(play) {
            JOptionPane.showMessageDialog(null, "Lets roll! "," ",JOptionPane.INFORMATION_MESSAGE, icon);
            p1.addToScore(dice.rollDice());
            p2.addToScore(dice.rollDice());
-           JOptionPane.showMessageDialog(null, p1.getFirstName() + " rolled: " + p1.getScore() + " " +
-                   "\n" + p2.getFirstName() + " rolled: " + p2.getScore(),"",JOptionPane.INFORMATION_MESSAGE,icon);
+           JOptionPane.showMessageDialog(null, p1.getFirstName() + " rolled: " + p1.getScore()  +
+                   "\n" + p2.getFirstName() + " rolled: " + p2.getScore(),"Lets go!",JOptionPane.INFORMATION_MESSAGE,icon);
            rounds--;
            if(rounds==0){
                checkWinner();
@@ -62,9 +64,9 @@ public class Game {
        if(p1.getTotalScore()==p2.getTotalScore()){
            JOptionPane.showMessageDialog(null, "Its A Tie!","",JOptionPane.INFORMATION_MESSAGE,icon );
        }else if(p1.getTotalScore()>p2.getTotalScore()){
-           JOptionPane.showMessageDialog(null, "The Winner Is: "+p1.getFullName()+"\nYou Won By: "+diffScore()+" Points.","",JOptionPane.INFORMATION_MESSAGE,icon);
+           JOptionPane.showMessageDialog(null, "The Winner Is: "+p1.getFullName()+"\nYou Won By: "+diffScore()+" Points.","Winner, winner, chicken dinner!",JOptionPane.INFORMATION_MESSAGE,icon);
        }else{
-           JOptionPane.showMessageDialog(null, "The Winner Is: "+p2.getFullName()+"\nYou Won By: "+diffScore()+" Points.","",JOptionPane.INFORMATION_MESSAGE,icon);
+           JOptionPane.showMessageDialog(null, "The Winner Is: "+p2.getFullName()+"\nYou Won By: "+diffScore()+" Points.","Winner, winner, chicken dinner!",JOptionPane.INFORMATION_MESSAGE,icon);
        }
        }
 
@@ -77,9 +79,9 @@ public class Game {
        }
 
        private boolean playAgain() {
-           int choice = JOptionPane.showConfirmDialog(null, "Do you want to play again?", " ", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icon);
+           int choice = JOptionPane.showConfirmDialog(null, "Do you want to play again?", " Restart", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icon);
            if (choice == JOptionPane.YES_OPTION) {
-               int newPlayers = JOptionPane.showConfirmDialog(null, "Do you want to change players?", " ", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icon);
+               int newPlayers = JOptionPane.showConfirmDialog(null, "Do you want to change players?", " Change Players", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icon);
                if (newPlayers == JOptionPane.YES_OPTION) {
                    resetGameNewPlayers();
                    return true;
@@ -115,6 +117,10 @@ public class Game {
        }
        public ImageIcon getIcon(){
        return icon;
+       }
+
+       public void setRounds(int rounds){
+       this.rounds=rounds;
        }
 
 

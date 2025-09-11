@@ -7,7 +7,7 @@ public class Main {
         Game game=new Game();
         game.setPlayers();
         game.startGame();
-        JOptionPane.showMessageDialog(null,"Thanks for Playing!"," ",JOptionPane.INFORMATION_MESSAGE,game.getIcon());
+        JOptionPane.showMessageDialog(null,"Thanks for Playing!","Goodbye ",JOptionPane.INFORMATION_MESSAGE,game.getIcon());
 
 
 
