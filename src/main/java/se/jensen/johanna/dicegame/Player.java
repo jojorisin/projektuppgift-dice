@@ -32,12 +32,12 @@ public class Player{
         return firstName;
     }
     public String getLastName(){
-        return lastName; //används ej. Har med för det stod i projektet, men hade hellre kört bara name.
+        return lastName; //används ej. Har med för det stod i projektet, hade hellre kört bara name.
     }
     public String getFullName(){
         return firstName+" "+lastName;
     }
-    public void setScore(int score){
+    public void addToScore(int score){
         this.score=score;
         this.totalScore+=score;
     }

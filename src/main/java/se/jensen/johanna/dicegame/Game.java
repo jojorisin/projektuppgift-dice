@@ -32,10 +32,8 @@ public class Game {
        this.round=2;
        while(play) {
            JOptionPane.showMessageDialog(null, "Lets roll! ");
-           int p1Score = dice.rollDice();
-           int p2Score = dice.rollDice();
-           p1.setScore(p1Score);
-           p2.setScore(p2Score);
+           p1.addToScore(dice.rollDice());
+           p2.addToScore(dice.rollDice());
            JOptionPane.showMessageDialog(null, p1.getFirstName() + " rolled: " + p1.getScore() + " " +
                    "\n" + p2.getFirstName() + " rolled: " + p2.getScore());
            this.round--;
@@ -51,7 +49,7 @@ public class Game {
        private void checkWinner(){
        if(p1.getTotalScore()==p2.getTotalScore()){
            JOptionPane.showMessageDialog(null, "Its A Tie!" );
-       }else if(p1.getScore()>p2.getScore()){
+       }else if(p1.getTotalScore()>p2.getTotalScore()){
            JOptionPane.showMessageDialog(null, "The Winner Is: "+p1.getFullName()+"\nYou Won By: "+diffScore()+" Points.");
        }else{
            JOptionPane.showMessageDialog(null, "The Winner Is: "+p2.getFullName()+"\nYou Won By: "+diffScore()+" Points.");
@@ -80,6 +78,7 @@ public class Game {
            p2.resetTotalScore();
 
        }
+       //reset game med ny player?
 
 
    }
