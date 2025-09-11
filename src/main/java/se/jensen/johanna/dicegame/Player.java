@@ -24,7 +24,7 @@ public class Player{
     }
 
     private boolean isValidName(String name){
-        return name!=null && !name.trim().isEmpty(); //viktigt me null först
+        return name!=null && !name.trim().isEmpty();
 
     }
 
@@ -32,7 +32,7 @@ public class Player{
         return firstName;
     }
     public String getLastName(){
-        return lastName; //används ej. Har med för det stod i projektet, hade hellre kört bara name.
+        return lastName; //oanvänd av helt personliga skäl.
     }
     public String getFullName(){
         return firstName+" "+lastName;
