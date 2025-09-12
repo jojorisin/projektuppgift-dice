@@ -1,6 +1,5 @@
 package se.jensen.johanna.dicegame;
 import javax.swing.*;
-import java.awt.*;
 
 
 public class Game {
@@ -10,49 +9,44 @@ public class Game {
    private boolean playersSet=false;
    private boolean play=false;
    private int rounds;
-   private final ImageIcon icon;
+  // private final ImageIcon icon;
+   private UI ui=new UI();
 
    public Game(){
-       icon=loadImageIcon();
+      // icon=loadImageIcon();
    }
-
 
    public void setPlayers(){
        while(!playersSet){
-           String p1Name= (String) JOptionPane.showInputDialog(null,"Player 1, please enter your first name: ","Enter name",JOptionPane.QUESTION_MESSAGE, icon,null," ");
-           String p1LastName=(String)JOptionPane.showInputDialog(null,"Player 1, please enter your last name: ","Enter name",JOptionPane.QUESTION_MESSAGE, icon,null," ");
-           String p2Name=(String)JOptionPane.showInputDialog(null,"Player 2, please enter your name: ","Enter name",JOptionPane.QUESTION_MESSAGE, icon,null," ");
-           String p2LastName=(String)JOptionPane.showInputDialog(null,"Player 2, please enter your last name: ","Enter name",JOptionPane.QUESTION_MESSAGE, icon,null," ");
-           try{
-               //this is messy, finns nog bättre sätt att göra det på
-               p1.setFirstName(p1Name);
-               p1.setLastName(p1LastName);
-               p2.setFirstName(p2Name);
-               p2.setLastName(p2LastName);
-               JOptionPane.showMessageDialog(null, "Player 1: "+p1.getFullName()+"\n "+"Player 2: "+p2.getFullName(),"Players",JOptionPane.INFORMATION_MESSAGE,icon);
-              playersSet=true;
-              play=true;
-           }catch(IllegalArgumentException e){
-               JOptionPane.showMessageDialog(null, e.getMessage());
-           }
+       try {
+           p1.setFirstName(ui.askForString("Player 1, Enter Your First Name"));
+           p1.setLastName(ui.askForString("Player 1, Enter Your Last Name"));
+           p2.setFirstName(ui.askForString("Player 2, Enter Your First Name"));
+           p2.setLastName(ui.askForString("Player 2, Enter Your Last Name"));
+           playersSet=true;
+           play=true;
+       }catch(IllegalArgumentException e){
+           ui.showMessageDialog(e.getMessage());
+
+       }
        }
    }
 
+
    public void startGame(){
-       if(!playersSet){
-           JOptionPane.showMessageDialog(null,"You have to set Players before you can start Game.","Invalid Players ",JOptionPane.INFORMATION_MESSAGE, icon);
+      if(!playersSet){
+          ui.showMessageDialog("You Have To Set Players Before You Can Start The Game");
            setPlayers();
        }
        rounds=2;
        while(play) {
-           JOptionPane.showMessageDialog(null, "Lets roll! "," ",JOptionPane.INFORMATION_MESSAGE, icon);
+           ui.showMessageDialog("Let's Roll!");
            p1.addToScore(dice.rollDice());
            p2.addToScore(dice.rollDice());
-           JOptionPane.showMessageDialog(null, p1.getFirstName() + " rolled: " + p1.getScore()  +
-                   "\n" + p2.getFirstName() + " rolled: " + p2.getScore(),"Lets go!",JOptionPane.INFORMATION_MESSAGE,icon);
+           ui.showMessageDialog(p1.getFirstName() + " rolled: " + p1.getScore()  +"\n" + p2.getFirstName() +" rolled:" + p2.getScore());
            rounds--;
            if(rounds==0){
-               checkWinner();
+               ui.showMessageDialog(checkWinner());
                play=playAgain();
                resetGame();
            }
@@ -60,13 +54,13 @@ public class Game {
        }
    }
 
-       private void checkWinner(){
+       public String checkWinner(){
        if(p1.getTotalScore()==p2.getTotalScore()){
-           JOptionPane.showMessageDialog(null, "Its A Tie!","",JOptionPane.INFORMATION_MESSAGE,icon );
+           return "It's A Tie!";
        }else if(p1.getTotalScore()>p2.getTotalScore()){
-           JOptionPane.showMessageDialog(null, "The Winner Is: "+p1.getFullName()+"\nYou Won By: "+diffScore()+" Points.","Winner, winner, chicken dinner!",JOptionPane.INFORMATION_MESSAGE,icon);
+           return "The Winner Is: "+p1.getFullName()+"\n You Won By: "+diffScore()+" Points.";
        }else{
-           JOptionPane.showMessageDialog(null, "The Winner Is: "+p2.getFullName()+"\nYou Won By: "+diffScore()+" Points.","Winner, winner, chicken dinner!",JOptionPane.INFORMATION_MESSAGE,icon);
+           return "The Winner Is: "+p2.getFullName()+"\nYou Won By: "+diffScore()+" Points.";
        }
        }
 
@@ -79,9 +73,9 @@ public class Game {
        }
 
        private boolean playAgain() {
-           int choice = JOptionPane.showConfirmDialog(null, "Do you want to play again?", " Restart", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icon);
+           int choice = ui.showConfirmDialog("Do You Want To Play Again?");
            if (choice == JOptionPane.YES_OPTION) {
-               int newPlayers = JOptionPane.showConfirmDialog(null, "Do you want to change players?", " Change Players", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icon);
+               int newPlayers = ui.showConfirmDialog("Do You Want To Change Players?");
                if (newPlayers == JOptionPane.YES_OPTION) {
                    resetGameNewPlayers();
                    return true;
@@ -107,25 +101,17 @@ public class Game {
 
        }
 
-       private ImageIcon loadImageIcon(){
-           ImageIcon temp = new ImageIcon(getClass().getResource("/images/diceIcon.png"));
-           Image scaled = temp.getImage().getScaledInstance(90, 64, Image.SCALE_SMOOTH);
-           return new ImageIcon(scaled);
-
 
 
        }
-       public ImageIcon getIcon(){
-       return icon;
-       }
-
-       public void setRounds(int rounds){
-       this.rounds=rounds;
-       }
 
 
 
-   }
+
+
+
+
+
 
 
 
