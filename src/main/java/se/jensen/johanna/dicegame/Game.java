@@ -9,12 +9,8 @@ public class Game {
    private boolean playersSet=false;
    private boolean play=false;
    private int rounds;
-  // private final ImageIcon icon;
    private UI ui=new UI();
 
-   public Game(){
-      // icon=loadImageIcon();
-   }
 
    public void setPlayers(){
        while(!playersSet){
@@ -54,7 +50,7 @@ public class Game {
        }
    }
 
-       public String checkWinner(){
+       private String checkWinner(){ //ändrade till private från public
        if(p1.getTotalScore()==p2.getTotalScore()){
            return "It's A Tie!";
        }else if(p1.getTotalScore()>p2.getTotalScore()){
