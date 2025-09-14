@@ -35,11 +35,19 @@ return input;
     }
 
 
-
     private boolean isValidInput(String input){
         return input!=null && !input.trim().isEmpty();
 
     }
+
+    public boolean playAgain() {
+        return showConfirmDialog("Do You Want To Play Again?")==JOptionPane.YES_OPTION;
+    }
+
+        public boolean newPlayers(){
+            return showConfirmDialog("Do You Want To Change Players?")==JOptionPane.YES_OPTION;
+        }
+
 
 
     private ImageIcon loadImageIcon() {
@@ -48,5 +56,6 @@ return input;
         return new ImageIcon(scaled);
 
     }
+
 
 }

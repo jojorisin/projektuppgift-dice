@@ -43,14 +43,17 @@ public class Game {
            rounds--;
            if(rounds==0){
                ui.showMessageDialog(checkWinner());
-               play=playAgain();
+               play=ui.playAgain();
+               if(play && ui.newPlayers()){
+                   resetGameNewPlayers();
+               }
                resetGame();
            }
 
        }
    }
 
-       private String checkWinner(){ //ändrade till private från public
+       private String checkWinner(){
        if(p1.getTotalScore()==p2.getTotalScore()){
            return "It's A Tie!";
        }else if(p1.getTotalScore()>p2.getTotalScore()){
@@ -68,29 +71,14 @@ public class Game {
 
        }
 
-       private boolean playAgain() {
-           int choice = ui.showConfirmDialog("Do You Want To Play Again?");
-           if (choice == JOptionPane.YES_OPTION) {
-               int newPlayers = ui.showConfirmDialog("Do You Want To Change Players?");
-               if (newPlayers == JOptionPane.YES_OPTION) {
-                   resetGameNewPlayers();
-                   return true;
-               } else if (newPlayers == JOptionPane.NO_OPTION) {
-                   resetGame();
-                   return true;
-               } else {
-                   return false;
-               }
-           }return false;
-       }
 
-       private void resetGame(){
+       public void resetGame(){
            rounds=2;
            p1.resetTotalScore();
            p2.resetTotalScore();
 
        }
-       private void resetGameNewPlayers(){
+       public void resetGameNewPlayers(){
        resetGame();
        playersSet=false;
        setPlayers();
