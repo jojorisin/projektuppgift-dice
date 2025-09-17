@@ -1,32 +1,26 @@
 package se.jensen.johanna.dicegame;
 
 public class Player{
-    private String firstName;
-    private String lastName;
+    private String name;
     private int score;
     private int totalScore;
 
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(String name) {
+        if(name.trim().isEmpty()){
+            throw new IllegalArgumentException("Name Cant Be Empty");
+        }
 
-        this.firstName=firstName;
+        this.name=name;
 
     }
-    public void setLastName(String lastName){
-        this.lastName=lastName;
-
-    }
 
 
-    public String getFirstName(){
-        return firstName;
+    public String getName(){
+        return name;
     }
-    public String getLastName(){
-        return lastName;
-    }
-    public String getFullName(){
-        return firstName+" "+lastName;
-    }
+
+
     public void addToScore(int score){
         this.score=score;
         this.totalScore+=score;

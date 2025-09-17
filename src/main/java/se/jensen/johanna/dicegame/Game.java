@@ -1,45 +1,39 @@
 package se.jensen.johanna.dicegame;
-import javax.swing.*;
 
 
 public class Game {
    private final Player  p1=new Player();
    private final Player p2=new Player();
    private final Dice dice=new Dice();
-   private boolean playersSet=false;
-   private boolean play=false;
+   private boolean play;
    private int rounds;
    private UI ui=new UI();
 
 
-   public void setPlayers(){
-       while(!playersSet){
-       try {
-           p1.setFirstName(ui.askForString("Player 1, Enter Your First Name"));
-           p1.setLastName(ui.askForString("Player 1, Enter Your Last Name"));
-           p2.setFirstName(ui.askForString("Player 2, Enter Your First Name"));
-           p2.setLastName(ui.askForString("Player 2, Enter Your Last Name"));
-           playersSet=true;
-           play=true;
-       }catch(IllegalArgumentException e){
-           ui.showMessageDialog(e.getMessage());
 
-       }
-       }
+   public boolean setPlayers(){
+       ui.showMessageDialog("Player 1");
+      if(!ui.setPlayerName(p1)){
+          return false;
+      }
+      ui.showMessageDialog("Player 2");
+      if( !ui.setPlayerName(p2)){
+          return false;
+      }
+      play=true;
+      return true;
    }
 
 
    public void startGame(){
-      if(!playersSet){
-          ui.showMessageDialog("You Have To Set Players Before You Can Start The Game");
-           setPlayers();
-       }
+       ui.showMessageDialog("WELCOME TO DICE GAME 2.0. \n \n Please Enter Your Names To Start The Game");
+       if(setPlayers()){
        rounds=2;
        while(play) {
            ui.showMessageDialog("Let's Roll!");
            p1.addToScore(dice.rollDice());
            p2.addToScore(dice.rollDice());
-           ui.showMessageDialog(p1.getFirstName() + " rolled: " + p1.getScore()  +"\n" + p2.getFirstName() +" rolled: " + p2.getScore());
+           ui.showMessageDialog(p1.getName() + " rolled: " + p1.getScore()  +"\n" + p2.getName() +" rolled: " + p2.getScore());
            rounds--;
            if(rounds==0){
                ui.showMessageDialog(checkWinner());
@@ -51,15 +45,16 @@ public class Game {
            }
 
        }
+   }ui.showMessageDialog("Thanks for Playing.");
    }
 
        private String checkWinner(){
        if(p1.getTotalScore()==p2.getTotalScore()){
            return "It's A Tie!";
        }else if(p1.getTotalScore()>p2.getTotalScore()){
-           return "The Winner Is: "+p1.getFullName()+"\n You Won By: "+diffScore()+" Points.";
+           return "The Winner Is: "+p1.getName()+"\n You Won By: "+diffScore()+" Points.";
        }else{
-           return "The Winner Is: "+p2.getFullName()+"\nYou Won By: "+diffScore()+" Points.";
+           return "The Winner Is: "+p2.getName()+"\nYou Won By: "+diffScore()+" Points.";
        }
        }
 
@@ -80,7 +75,6 @@ public class Game {
        }
        public void resetGameNewPlayers(){
        resetGame();
-       playersSet=false;
        setPlayers();
 
        }
