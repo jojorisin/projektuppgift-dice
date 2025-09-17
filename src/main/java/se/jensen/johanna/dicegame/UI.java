@@ -23,9 +23,10 @@ public class UI {
     }
 
     public String askForString(String question) throws IllegalArgumentException{
-
         do {
-            input = (String) JOptionPane.showInputDialog(null, question, null, JOptionPane.QUESTION_MESSAGE, icon, null, " ");
+           isCancel( input = (String) JOptionPane.showInputDialog(null, question, null, JOptionPane.QUESTION_MESSAGE, icon, null, " "));
+
+
             if (!isValidInput(input)) {
                 throw new IllegalArgumentException("Input Can't Be Empty");
             }
@@ -36,6 +37,7 @@ return input;
 
 
     private boolean isValidInput(String input){
+
         return input!=null && !input.trim().isEmpty();
 
     }
@@ -54,6 +56,18 @@ return input;
         ImageIcon temp = new ImageIcon(getClass().getResource("/images/diceIcon.png"));
         Image scaled = temp.getImage().getScaledInstance(90, 64, Image.SCALE_SMOOTH);
         return new ImageIcon(scaled);
+
+    }
+
+    private boolean isCancel(String input){
+        if(input==null){
+            if(showConfirmDialog("Are You Sure You Want To Cancel?")==JOptionPane.YES_OPTION){
+                System.exit(0);
+        }else{
+                return false;
+
+            }
+        }return true;
 
     }
 

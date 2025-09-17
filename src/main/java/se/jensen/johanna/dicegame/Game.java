@@ -39,7 +39,7 @@ public class Game {
            ui.showMessageDialog("Let's Roll!");
            p1.addToScore(dice.rollDice());
            p2.addToScore(dice.rollDice());
-           ui.showMessageDialog(p1.getFirstName() + " rolled: " + p1.getScore()  +"\n" + p2.getFirstName() +" rolled:" + p2.getScore());
+           ui.showMessageDialog(p1.getFirstName() + " rolled: " + p1.getScore()  +"\n" + p2.getFirstName() +" rolled: " + p2.getScore());
            rounds--;
            if(rounds==0){
                ui.showMessageDialog(checkWinner());
