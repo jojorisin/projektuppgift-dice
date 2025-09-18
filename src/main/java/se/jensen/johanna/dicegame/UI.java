@@ -14,7 +14,14 @@ public class UI {
 
     public boolean setPlayerName(Player p){
         while (true) {
-            String pName = (String) JOptionPane.showInputDialog(null, "Please Enter A Name", null, JOptionPane.QUESTION_MESSAGE, icon, null, " ");
+            String pName = (String) JOptionPane.showInputDialog(
+                    null,
+                    "Please Enter A Name",
+                    null,
+                    JOptionPane.QUESTION_MESSAGE,
+                    icon,
+                    null,
+                    " ");
             if(pName==null){
                 return false;
             }
@@ -28,12 +35,23 @@ public class UI {
     }}
 
     public void showMessageDialog(String message) {
-        JOptionPane.showMessageDialog(null, message, "", JOptionPane.INFORMATION_MESSAGE, icon);
+        JOptionPane.showMessageDialog(
+                null,
+                message,
+                "",
+                JOptionPane.INFORMATION_MESSAGE,
+                icon);
 
     }
 
     public int showConfirmDialog(String question){
-       return JOptionPane.showConfirmDialog(null, question, null, JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,icon);
+       return JOptionPane.showConfirmDialog(
+               null,
+               question,
+               null,
+               JOptionPane.YES_NO_OPTION,
+               JOptionPane.QUESTION_MESSAGE,
+               icon);
 
     }
 
