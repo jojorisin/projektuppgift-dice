@@ -26,7 +26,7 @@ public class UI {
                 return false;
             }
             try{
-                p.setFirstName(pName);
+                p.setName(pName);
                 return true;
             }catch(IllegalArgumentException e){
                 showMessageDialog(e.getMessage());

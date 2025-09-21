@@ -11,7 +11,7 @@ public class Game {
 
 
 
-   public boolean setPlayers(){
+   private boolean setPlayers(){
        ui.showMessageDialog("Player 1");
       if(!ui.setPlayerName(p1)){
           return false;
@@ -69,13 +69,13 @@ public class Game {
        }
 
 
-       public void resetGame(){
+       private void resetGame(){
            rounds=2;
-           p1.resetTotalScore();
-           p2.resetTotalScore();
+           p1.resetScore();
+           p2.resetScore();
 
        }
-       public void resetGameNewPlayers(){
+       private void resetGameNewPlayers(){
        resetGame();
        setPlayers();
 

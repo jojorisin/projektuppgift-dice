@@ -6,7 +6,7 @@ public class Player{
     private int totalScore;
 
 
-    public void setFirstName(String name) {
+    public void setName(String name) {
         if(name.trim().isEmpty()){
             throw new IllegalArgumentException("Name Cant Be Empty");
         }
@@ -31,7 +31,7 @@ public class Player{
     public int getTotalScore(){
         return totalScore;
     }
-    public void resetTotalScore(){
-        this.totalScore=0;
+    public void resetScore(){
+        this.totalScore=0; this.score=0;
     }
 }
